@@ -27,7 +27,7 @@ while getopts ":i:p:o:n:" arg; do
 done
 shift $((OPTIND-1))
 
-bearerToken=$(az account get-access-token | jq .accessToken -r)
+bearerToken=$(az account get-access-token -o json| jq .accessToken -r)
 
 #Get current term
 term=$(curl -X "GET" "https://management.azure.com/subscriptions/$subscriptionId/providers/Microsoft.MarketplaceOrdering/offerTypes/virtualmachine/publishers/$publisherId/offers/$offerId/plans/$planId/agreements/current?api-version=2015-06-01" \
